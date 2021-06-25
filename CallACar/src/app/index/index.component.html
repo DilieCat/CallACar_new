@@ -1,0 +1,49 @@
+
+
+<div class="container">
+    <p [style.display]="activeText" class="font-weight-light text-center">You are using a car now. Click on the button below to stop the ride.</p>
+    <p [style.display]="noLicenseText" class="text-danger">You need an driverlicense to order a car! Come back when you have your driver license.</p>
+
+    <div class="row">
+        <div class="col" align="center"> 
+            <button [style.display]="stopSessionButton" type="button" class="btn btn-primary" (click)="stopSession()">Stop ride</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" align="center"> 
+            <button [style.display]="orderCarToHomeVisible" type="button" class="btn btn-primary" (click)="orderToHome()">Order car to home</button>
+            <br>
+            <br>
+            <button [style.display]="orderCarToAdressVisible" type="button" class="btn btn-primary" (click)="orderToAddress()" >Order car</button>
+
+        </div>
+    </div>
+
+    <form [style.display]="addressFormVisible">
+        <div class="form-group">
+          <label for="Address">Adress</label>
+          <input type="text" class="form-control" name="Adress" aria-describedby="Address" placeholder="Enter address" [(ngModel)]="chosenAddress" >
+          <small id="Address-small" class="form-text text-muted">Fill in the pickup address</small>
+        </div>
+      </form>
+
+    <div class="row carSelector">
+        <div class="col" align="center"> 
+            <select [style.display]="carSelectorVisible" class="form-select" size="5" aria-label="size 3 select example" [(ngModel)]="selectedCar" #testu>
+                <option *ngFor="let car of cars;" [ngValue]="car">Brand: {{car.brand}} | Type: {{car.type}}</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="row carSelector">
+        <div class="col" align="center"> 
+            <button [style.display]="orderButtonVisible" type="button" class="btn btn-primary" (click)="createOrder()" ngbTooltip="Will disappear in 15s">Order car</button>
+        </div>
+    </div>
+</div>
+<!-- <app-toasts aria-live="polite" aria-atomic="true"></app-toasts> --> 
+
+

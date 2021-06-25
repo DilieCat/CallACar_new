@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Start Location</th>
+        <th scope="col">End Location</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Car Name</th>
+        <th scope="col">Driven KM</th>
+        <th scope="col">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{order.startLocation}}</td>
+        <td>{{order.endLocation}}</td>
+        <td>{{order.startTime}}</td>
+        <td>{{order.endTime}}</td>
+        <td>{{order.car}}</td>
+        <td>{{order.drivenKm}}</td>
+        <td>{{order.costs}}</td>
+      </tr>
+    </tbody>
+  </table>

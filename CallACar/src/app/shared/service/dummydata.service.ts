@@ -15,6 +15,6 @@ export class DummydataService {
   constructor(private http: HttpClient) { }
   
   getDummyUser() : Observable<User>{
-    return this.http.post<User>(this.url + '/active', {id: '606ee1ce7bf01a5d39387098'})
+    return this.http.post<User>(this.url + '/active', {name: 'Dilie'})
   }
 }

@@ -82,9 +82,14 @@ export class IndexComponent implements OnInit {
     this.dummyDataService.getDummyUser().subscribe((data: User) => {
       this.user = data
       this.userService.getOneUser(this.user).subscribe(data => {
+        console.log(data)
         if(data.activeCar) return this.activeState()
         if(!data.driversLicense) return this.noLicense()
-      })
+      }, 
+      err =>{
+        console.log(err)
+      }
+      )
     })
     this.carService.getCars().subscribe((data: Car[]) => {
       this.cars = data

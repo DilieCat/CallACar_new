@@ -15,6 +15,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   getOneUser(user: User) : Observable<User>{
-    return this.http.post<User>(this.url + '/active', {id: user._id})
+    return this.http.post<User>(this.url + '/active', {name: user.name})
   }
 }

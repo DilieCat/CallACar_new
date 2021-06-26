@@ -83,7 +83,7 @@ function remove(req, res) {
 };
 
 function isActive(req, res) {
-    User.findById(req.body.id).exec()
+    User.findOne({name: req.body.name}).exec()
         .then(users => {
             res.status(200).send(users);
         })

@@ -28,7 +28,33 @@ function getOneById(req, res){
 }
 
 function updateUser(req, res) {
-    User.findByIdAndUpdate(req.params.id)
+    User.findById(req.params.id)
+        .then(user => {
+            if(user === null){
+                res.status(401).send("User does not exist.");
+            }
+            else {
+                let nameToSet = req.body.name;
+                let ageToSet = req.body.age;
+                let homeToSet = req.body.homeAddress;
+                let consentToSet = req.body.consent;
+                if(req.body.name === '' || req.body.name === null) nameToSet = user.name;
+                if (req.body.age === '' || req.body.age === null) ageToSet = user.age;
+                if (req.body.homeAddress === '' || req.body.homeAddress === null) homeToSet = user.homeAddress;
+
+                user.set({
+                    name: nameToSet,
+                    age: ageToSet,
+                    homeAddress: homeToSet,
+                    consent: consentToSet
+                })
+                user.save()
+                    .then(() => {
+                        res.status(200).send("Succesfully updated the user");
+                        console.log(">> Updated user");
+                })
+            }
+        })
 }
 
 function create(req, res) {

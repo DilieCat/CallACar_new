@@ -10,22 +10,49 @@ import { UserService } from '../shared/service/user.service';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private userService: UserService) {}
+  gaveConsent: boolean;
+  public accountForm: FormGroup
 
-  ngOnInit() {
+  constructor(private userService: UserService) {
   }
 
-  public accountForm: FormGroup = new FormGroup({
-    name: new FormControl(localStorage.getItem("UserName"), Validators.required),
-    age: new FormControl(localStorage.getItem("UserAge"), Validators.required),
-    homeAddress: new FormControl(localStorage.getItem("UserAddress"), Validators.required),
-  });
+  ngOnInit() {
+    if (localStorage.getItem("UserConsent") == "false") {
+      this.gaveConsent = false;
+    } else {
+      this.gaveConsent = true;
+    }
+    this.accountForm = new FormGroup({
+      name: new FormControl(localStorage.getItem("UserName"), Validators.required),
+      age: new FormControl(localStorage.getItem("UserAge"), Validators.required),
+      homeAddress: new FormControl(localStorage.getItem("UserAddress"), Validators.required),
+      consent: new FormControl(this.gaveConsent, Validators.required)
+    });
+  }
+
+   
   
 
   //TODO make an update function for the user.
-  // onSubmit(){
-  //   this.userService.updateUser().subscribe((res: User) => {
-
-  //   })
-  // }
+  onSubmit(){
+    this.userService.updateUser(localStorage.getItem("UserId"),this.accountForm.getRawValue()).subscribe((res: any) => {
+      console.log("Succesfully updated user" + res.name + res.age + res.homeAddress);
+    },
+    (error) => {
+      this.userService.getUserById(localStorage.getItem("UserId")).subscribe((res: any) => {
+        localStorage.removeItem("UserAddress");
+        localStorage.removeItem("UserAge");
+        localStorage.removeItem("UserName");
+        localStorage.removeItem("UserConsent");
+        localStorage.setItem("UserAddress", res.homeAddress);
+        localStorage.setItem("UserName", res.name);
+        localStorage.setItem("UserAge", res.age.toString());
+        localStorage.setItem("UserConsent", res.consent.toString());
+      })
+    });
+    
+    // (error) => {
+    //   console.error("Error caught in the update user");
+    // });
+  }
 }

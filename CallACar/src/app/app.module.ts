@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { HistoryComponent } from './history/history.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { UserService } from './shared/service/user.service';
 import { AccountComponent } from './account/account.component';
+import { TokenInterceptorService } from './shared/service/token-interceptor.service';
+import { UserHistoryComponent } from './user-history/user-history.component';
   
 
 @NgModule({
@@ -26,7 +28,8 @@ import { AccountComponent } from './account/account.component';
     HistoryComponent,
     RegisterComponent,
     LoginComponent,
-    AccountComponent
+    AccountComponent,
+    UserHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,12 @@ import { AccountComponent } from './account/account.component';
     ReactiveFormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

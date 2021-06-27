@@ -84,9 +84,9 @@ export class IndexComponent implements OnInit {
       this.user = data;
       localStorage.setItem("UserAge", data.age.toString());
       localStorage.setItem("UserAddress", data.homeAddress);
+      localStorage.setItem("UserConsent", data.consent.toString());
       console.log("The data:");
       console.log(data);
-      localStorage.setItem("User", data.toString());
       if(data.activeCar) return this.activeState();
       if(!data.driversLicense) return this.noLicense();
     })

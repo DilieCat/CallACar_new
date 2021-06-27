@@ -20,6 +20,10 @@
                     <label>Thuis adres</label>
                     <input type="text" formControlName="homeAddress" />
                 </div>
+                <div class="input">
+                    <label>Toestemming om data te delen.</label>
+                    <input type="checkbox" formControlName="consent">
+                </div>
                 <button class="btn btn-success" type="submit" [disabled]="!accountForm.valid">Opslaan</button>
             </form>
         </div>

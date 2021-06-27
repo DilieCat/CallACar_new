@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import { DummydataService } from '../shared/service/dummydata.service';
 import { Order } from '../models/Order';
 import { CarService } from '../shared/service/car.service';
+import { UserService } from '../shared/service/user.service';
 
 @Component({
   selector: 'app-history',
@@ -15,10 +16,10 @@ export class HistoryComponent implements OnInit {
   public user: User
   public orders: Order[]
 
-  constructor(public orderService: OrderService, public dummyService: DummydataService, public carService: CarService) { }
+  constructor(public orderService: OrderService, public dummyService: DummydataService, public carService: CarService, public userService: UserService) { }
 
   ngOnInit() {
-    this.dummyService.getDummyUser().subscribe(data => {
+    this.userService.getUserById(localStorage.getItem("UserId")).subscribe((data: User) => {
       this.user = data
       this.orderService.getUserOrder(this.user).subscribe(history => {
         this.orders = history

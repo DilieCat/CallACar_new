@@ -2,6 +2,7 @@ const Order = require('../models/order');
 
 function getAll(req, res) {
     Order.find()
+    .populate('user car')
         .then(orders => {
             res.status(200).send(orders);
         })

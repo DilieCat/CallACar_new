@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from '../../shared/service/user.service';
 
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
     homeAddress: new FormControl("", Validators.required),
   })
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.userService.register(this.registerForm.getRawValue()).subscribe((res: any) => {
+      this.router.navigate(['/login']);
       console.log("Succesfully registered user.");
     })
   }

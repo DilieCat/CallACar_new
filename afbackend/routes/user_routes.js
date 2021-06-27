@@ -13,6 +13,10 @@ module.exports = (app) => {
     //User routes
     //get all users
     app.get('/api/user/', AuthController.validateToken, UserController.getAll);
+
+    app.get('/api/user/:id', UserController.getOneById);
+
+    app.put('api/user/', UserController.updateUser);
     app.post('/api/user/active', UserController.isActive);
     //change password of an existing user with 'password, newPassword'
     app.put('/api/user/:id', AuthController.validateToken, AuthController.validateAdmin, UserController.editPassword);

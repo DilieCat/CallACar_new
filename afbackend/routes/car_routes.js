@@ -6,6 +6,8 @@ module.exports = (app) => {
     //get all cars
     app.get('/api/cars/', CarController.getAll);
 
+    app.get('/api/car/:id', CarController.getCarById);
+
     app.get('/api/cars/available', CarController.getAllAvailable)
     //create a car
     app.post('/api/cars/', CarController.createCar);

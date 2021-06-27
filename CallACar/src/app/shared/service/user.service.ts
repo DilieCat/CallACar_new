@@ -14,7 +14,23 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
-  getOneUser(user: User) : Observable<User>{
-    return this.http.post<User>(this.url + '/active', {name: user.name})
+  public getOneUser(name) : Observable<User>{
+    return this.http.post<User>(this.url + '/active', {name: name})
   }
+
+  public getUserById(_id) : Observable<User>{
+    return this.http.get<User>(this.url + "/" + _id);
+  }
+
+  // public updateUser(user: User) : Observable<User> {
+  //   return this.http.put<User>(this.url + user._id);
+  // }
+
+  public register(registerStuff: User) : Observable<any> {
+    return this.http.post<any>(this.url + '/register', registerStuff);
+  }
+
+  public login(name: string, password: string) : Observable<User>{
+    return this.http.post<User>(this.url + '/login', {name: name, password: password})
+  } 
 }

@@ -10,6 +10,16 @@ function getAll(req, res) {
         })
 }
 
+function getCarById(req,res) {
+    Car.findById(req.params.id)
+    .then((car) => {
+        res.status(200).send(car);
+    })
+    .catch(err => {
+            res.status(401).send(err);
+    })
+}
+
 function getAllAvailable(req, res) {
     Car.find({available: true})
         .then(cars => {
@@ -56,5 +66,6 @@ module.exports = {
     getAll,
     createCar,
     remove,
+    getCarById,
     getAllAvailable
 }

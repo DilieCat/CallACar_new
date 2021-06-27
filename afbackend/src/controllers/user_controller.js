@@ -6,11 +6,29 @@ const config = require('../../config/auth_config');
 function getAll(req, res) {
     User.find({}, { password: 0, admin: 0, __v: 0 })
         .then(users => {
+            console.log("User found, sending it out now");
             res.status(200).send(users);
         })
         .catch(err => {
             res.status(401).send(err);
         })
+}
+
+function getOneById(req, res){
+    console.log(req.params.id);
+    User.findById(req.params.id)
+        .then(user => {
+            console.log("Returning this user:");
+            console.log(user);
+            res.status(200).send(user);
+        })
+        .catch(err => {
+            res.status(401).send(err);
+        })
+}
+
+function updateUser(req, res) {
+    User.findByIdAndUpdate(req.params.id)
 }
 
 function create(req, res) {
@@ -94,8 +112,10 @@ function isActive(req, res) {
 
 module.exports = {
     getAll,
+    getOneById,
     create,
     editPassword,
     remove,
-    isActive
+    isActive,
+    updateUser
 }

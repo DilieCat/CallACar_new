@@ -20,6 +20,10 @@ export class CarService {
     return this.http.get<Car[]>(this.url + '/available')
   }
 
+  getCarById(_id) : Observable<Car>{
+    return this.http.get<Car>(environment.apiBaseUrl + 'car' + _id);
+  }
+
   getCarHistory(user: User) : Observable<History[]>{
     //write a post http request that returns the history of a user
     return 

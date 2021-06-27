@@ -17,7 +17,7 @@ import { UserService } from './shared/service/user.service';
 import { AccountComponent } from './account/account.component';
 import { TokenInterceptorService } from './shared/service/token-interceptor.service';
 import { UserHistoryComponent } from './user-history/user-history.component';
-
+import { PlannerComponent } from './planner/planner.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { UserHistoryComponent } from './user-history/user-history.component';
     RegisterComponent,
     LoginComponent,
     AccountComponent,
-    UserHistoryComponent
+    UserHistoryComponent,
+    PlannerComponent
   ],
   imports: [
     BrowserModule,

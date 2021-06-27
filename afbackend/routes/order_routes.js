@@ -1,4 +1,5 @@
 const OrderController = require('../src/controllers/order_controller');
+const AuthController = require('../src/controllers/auth_controller');
 
 module.exports = (app) => {
     //Order routes

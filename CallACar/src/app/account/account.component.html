@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="title text-center">Account</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    
+                <div class="input">
+                    <label>Naam</label>
+                    <input type="text" formControlName="name" />
+                </div>
+                <div class="input">
+                    <label>Leeftijd</label>
+                    <input type="text" formControlName="age" />
+                </div>
+                <div class="input">
+                    <label>Thuis adres</label>
+                    <input type="text" formControlName="homeAddress" />
+                </div>
+                <div class="input">
+                    <label>Toestemming om data te delen.</label>
+                    <input type="checkbox" formControlName="consent">
+                </div>
+                <button class="btn btn-success" type="submit" [disabled]="!accountForm.valid">Opslaan</button>
+            </form>
+        </div>
+    </div>
+</div>

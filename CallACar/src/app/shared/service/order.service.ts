@@ -15,11 +15,15 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   postOrder(order: Order): Observable<Order>{
-    return this.http.post<Order>(this.url, order)
+    return this.http.post<Order>(this.url, order);
   }
 
   getUserOrder(user: User): Observable<Order[]>{
-    return this.http.get<Order[]>(this.url + '/' + user._id)
+    return this.http.get<Order[]>(this.url + '/' + user._id);
+  }
+
+  getAllOrders(): Observable<Order[]>{
+    return this.http.get<Order[]>(this.url);
   }
 
 }

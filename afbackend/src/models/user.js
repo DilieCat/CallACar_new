@@ -38,6 +38,10 @@ const UserSchema = new Schema({
     activeCar: {
         type: Boolean,
         default: false
+    },
+    consent: {
+        type: Boolean,
+        default: false
     }
     //Maybe not needed
     // orders: [{

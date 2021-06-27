@@ -6,10 +6,54 @@ const config = require('../../config/auth_config');
 function getAll(req, res) {
     User.find({}, { password: 0, admin: 0, __v: 0 })
         .then(users => {
+            console.log("User found, sending it out now");
             res.status(200).send(users);
         })
         .catch(err => {
             res.status(401).send(err);
+        })
+}
+
+function getOneById(req, res){
+    console.log(req.params.id);
+    User.findById(req.params.id)
+        .then(user => {
+            console.log("Returning this user:");
+            console.log(user);
+            res.status(200).send(user);
+        })
+        .catch(err => {
+            res.status(401).send(err);
+        })
+}
+
+function updateUser(req, res) {
+    User.findById(req.params.id)
+        .then(user => {
+            if(user === null){
+                res.status(401).send("User does not exist.");
+            }
+            else {
+                let nameToSet = req.body.name;
+                let ageToSet = req.body.age;
+                let homeToSet = req.body.homeAddress;
+                let consentToSet = req.body.consent;
+                if(req.body.name === '' || req.body.name === null) nameToSet = user.name;
+                if (req.body.age === '' || req.body.age === null) ageToSet = user.age;
+                if (req.body.homeAddress === '' || req.body.homeAddress === null) homeToSet = user.homeAddress;
+
+                user.set({
+                    name: nameToSet,
+                    age: ageToSet,
+                    homeAddress: homeToSet,
+                    consent: consentToSet
+                })
+                user.save()
+                    .then(() => {
+                        res.status(200).send("Succesfully updated the user");
+                        console.log(">> Updated user");
+                })
+            }
         })
 }
 
@@ -94,8 +138,10 @@ function isActive(req, res) {
 
 module.exports = {
     getAll,
+    getOneById,
     create,
     editPassword,
     remove,
-    isActive
+    isActive,
+    updateUser
 }

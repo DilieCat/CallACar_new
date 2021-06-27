@@ -79,17 +79,16 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dummyDataService.getDummyUser().subscribe((data: User) => {
-      this.user = data
-      this.userService.getOneUser(this.user).subscribe(data => {
-        console.log(data)
-        if(data.activeCar) return this.activeState()
-        if(!data.driversLicense) return this.noLicense()
-      }, 
-      err =>{
-        console.log(err)
-      }
-      )
+      const id = localStorage.getItem("UserId");
+      this.userService.getUserById(id).subscribe((data: User) => {
+      this.user = data;
+      localStorage.setItem("UserAge", data.age.toString());
+      localStorage.setItem("UserAddress", data.homeAddress);
+      localStorage.setItem("UserConsent", data.consent.toString());
+      console.log("The data:");
+      console.log(data);
+      if(data.activeCar) return this.activeState();
+      if(!data.driversLicense) return this.noLicense();
     })
     this.carService.getCars().subscribe((data: Car[]) => {
       this.cars = data

@@ -14,7 +14,7 @@ function getAll(req, res) {
         })
 }
 
-function getOneById(req, res){
+function getOneById(req, res) {
     console.log(req.params.id);
     User.findById(req.params.id)
         .then(user => {
@@ -30,7 +30,7 @@ function getOneById(req, res){
 function updateUser(req, res) {
     User.findById(req.params.id)
         .then(user => {
-            if(user === null){
+            if (user === null) {
                 res.status(401).send("User does not exist.");
             }
             else {
@@ -38,7 +38,7 @@ function updateUser(req, res) {
                 let ageToSet = req.body.age;
                 let homeToSet = req.body.homeAddress;
                 let consentToSet = req.body.consent;
-                if(req.body.name === '' || req.body.name === null) nameToSet = user.name;
+                if (req.body.name === '' || req.body.name === null) nameToSet = user.name;
                 if (req.body.age === '' || req.body.age === null) ageToSet = user.age;
                 if (req.body.homeAddress === '' || req.body.homeAddress === null) homeToSet = user.homeAddress;
 
@@ -52,7 +52,7 @@ function updateUser(req, res) {
                     .then(() => {
                         res.status(200).send("Succesfully updated the user");
                         console.log(">> Updated user");
-                })
+                    })
             }
         })
 }
@@ -127,7 +127,7 @@ function remove(req, res) {
 };
 
 function isActive(req, res) {
-    User.findOne({name: req.body.name}).exec()
+    User.findOne({ name: req.body.name }).exec()
         .then(users => {
             res.status(200).send(users);
         })

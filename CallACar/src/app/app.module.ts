@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { HistoryComponent } from './history/history.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HistoryComponent } from './history/history.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

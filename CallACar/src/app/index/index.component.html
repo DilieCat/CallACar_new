@@ -28,6 +28,11 @@
         </div>
       </form>
 
+      <div [style.display]="addressFormVisible" >
+    What time do u want to order the car?  
+    <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+        </div>
+
     <div class="row carSelector">
         <div class="col" align="center"> 
             <select [style.display]="carSelectorVisible" class="form-select" size="5" aria-label="size 3 select example" [(ngModel)]="selectedCar" #testu>

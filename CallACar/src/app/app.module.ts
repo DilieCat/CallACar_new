@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { HistoryComponent } from './history/history.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { UserService } from './shared/service/user.service';
@@ -17,7 +18,6 @@ import { AccountComponent } from './account/account.component';
 import { TokenInterceptorService } from './shared/service/token-interceptor.service';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { PlannerComponent } from './planner/planner.component';
-  
 
 @NgModule({
   declarations: [
@@ -38,8 +38,8 @@ import { PlannerComponent } from './planner/planner.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     ReactiveFormsModule
-
   ],
   exports: [
     ReactiveFormsModule

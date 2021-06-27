@@ -32,6 +32,7 @@ export class IndexComponent implements OnInit {
   public chosenAddress: string
   public address: string
   public user: User
+  time = {hour: 13, minute: 30};
 
   //Dummy data
 
@@ -59,13 +60,12 @@ export class IndexComponent implements OnInit {
   createOrder(){
     let time: string = this.getCurrentTime()
     let order: Order = new Order(this.user._id, this.chosenAddress, 'Statenplein', time, '18:00', this.selectedCar._id, 25, 22)
+    console.log(this.user._id)
     console.log(this.user)
     console.log(order)
     console.log(this.user.homeAddress)
     console.log(this.chosenAddress)
-    this.sessionService.postSession(this.user, this.selectedCar, this.chosenAddress, 'Oost breda').subscribe((data) => {
-      console.log(data)
-    });
+    this.sessionService.postSession(this.user, this.selectedCar, this.chosenAddress, 'Oost breda')
     this.activeState()
   }
 
@@ -97,9 +97,8 @@ export class IndexComponent implements OnInit {
   }
 
   stopSession(){
-    this.sessionService.stopSession(this.user).subscribe((data) => {
-      console.log(data)
-    })
+    console.log(this.user)
+    this.sessionService.stopSession(this.user)
     this.unactiveState()
   }
 

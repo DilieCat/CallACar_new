@@ -107,6 +107,38 @@ function createSession(req, res) {
     })
 }
 
+function createSessionWithStartTIme(req, res) {
+    let userId = req.body.userId
+    let carId = req.body.carId
+    let starTime = req.body.starTime
+    Session.create({
+        userId: userId,
+        carId: carId,
+        startTime: starTime,
+        endTime: "",
+        startLocation: req.body.startLocation,
+        endLocation: req.body.endLocation
+    })
+        .then(() =>
+            res.status(200).send("Succesfully created an session."))
+        .catch((err) => {
+            res.status(401).send({ err });
+        })
+
+
+    User.findOneAndUpdate({_id: userId}, {activeCar: true})
+    .then(() => {})
+    .catch((err) => {
+        res.status(401).send({ err });
+    })
+
+    Car.findOneAndUpdate({_id: carId}, {available: false})
+    .then(() => {})
+    .catch((err) => {
+        res.status(401).send({ err });
+    })
+}
+
 
 function remove(req, res) {
     Car.findOne({ _id: req.params.id })

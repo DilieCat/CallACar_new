@@ -1,10 +1,11 @@
 const OrderController = require('../src/controllers/order_controller');
+const AuthController = require('../src/controllers/auth_controller');
 
 module.exports = (app) => {
     //Order routes
     app.get('/api/order/:id', OrderController.getUserOrder);
     //get all orders
-    app.get('/api/order/', OrderController.getAll);
+    app.get('/api/order/', OrderController.getAll, AuthController.validateAdmin);
     //create a order
     app.post('/api/order/', OrderController.createOrder);
     //remove a order from the database with it's id
